@@ -17,4 +17,4 @@ vagrant plugin install vagrant-mutate
 
 # Install NFS
 sudo apt update
-sudo apt install nfs-kernal-server
+sudo apt install nfs-kernel-server
