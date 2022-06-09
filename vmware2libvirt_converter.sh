@@ -21,7 +21,7 @@ if [ $2 != "" ]
 then
     echo "Second argument passed"
 else
-    echo "First argument (the vmware image, without the ending (.vmdk)) is missing"
+    echo "Second argument (the vmware config file, without the ending (.vmx)) is missing"
     exit 1
 fi
 
@@ -29,7 +29,7 @@ if [ -e Vagrantfile ]
 then
     echo "Vagrantfile existing"
 else
-    echo "Vagrantfile is missing"
+    echo "Vagrantfile is missing in the directory"
     exit 1
 fi
 
