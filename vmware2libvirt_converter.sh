@@ -45,7 +45,7 @@ echo $VMWARE_FILE
 # Generated Outputfiles:
 LIBVIRT_IMAGE=$1".qcow2"
 LIBVIRT_FILE=$2".xml"
-LIBVIRT_BOX=$2"_box.box"
+LIBVIRT_BOX=$1"_box.box"
 
 ## installing the script to convert .vmx to .xml file (vmware2libvirt)
 # sudo apt update
@@ -58,6 +58,7 @@ LIBVIRT_BOX=$2"_box.box"
 
 
 # Converting the image .vmdk (vmware) to .qcow2 
+echo "converting the .vmdk file to qcow2"
 qemu-img convert -f vmdk -O qcow2 $VMWARE_IMAGE $LIBVIRT_IMAGE
 echo "converted to .qcow2 file" 
 
@@ -92,3 +93,7 @@ echo "Box packed"
 echo "Adding the box to Vagrant ..."
 vagrant box add --name $LIBVIRT_BOX --provider libvirt $LIBVIRT_BOX
 echo "Box added to Vagrant"
+
+echo " "
+echo "############ Finished Converting ###########"
+echo "Check with: 'vagrant box list' if the box was added succesfully to Vagrant "
