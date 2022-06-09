@@ -47,12 +47,12 @@ LIBVIRT_IMAGE=$1".qcow2"
 LIBVIRT_FILE=$2".xml"
 LIBVIRT_BOX=$2"_box.box"
 
-# installing the script to convert .vmx to .xml file (vmware2libvirt)
-sudo apt update
-sudo  apt install python2
-wget https://bazaar.launchpad.net/~ubuntu-virt/virt-goodies/trunk/download/head:/vmware2libvirt
-chmod 755 vmware2libvirt
-sudo mv -iv vmware2libvirt /usr/local/bin/
+## installing the script to convert .vmx to .xml file (vmware2libvirt)
+# sudo apt update
+# sudo  apt install python2
+# wget https://bazaar.launchpad.net/~ubuntu-virt/virt-goodies/trunk/download/head:/vmware2libvirt
+# chmod 755 vmware2libvirt
+# sudo mv -iv vmware2libvirt /usr/local/bin/
 ############ CHANGE FIRST LINE TO ################
 ############ #! /usr/bin/env python2.7 ###########
 
