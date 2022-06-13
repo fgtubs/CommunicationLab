@@ -1,17 +1,38 @@
-#!/bin/sh
+#!/bin/bash
 
 # Converting a VMware image to a libvirt image
 
 ########################################################
 ## Make sure that you have all this in your directory ##
-#   - the file you want to convert (.vmdx)             #
+#   - the file you want to convert (.vmdk)             #
 #   - the file you want to convert (.vmx)              #
 #   - the Vagrant file                                 #
 ########################################################
+cat << EOF
+## Make sure that you have all this in your directory ##
+#   - the file you want to convert (.vmdk)             #
+#   - the file you want to convert (.vmx)              #
+#   - the Vagrant file                                 #
+EOF
+
+read -p "Are all required file in this directory? [Y/n] " response
+if [ $response != 'Y' ] || [ $response != 'y' ]
+then
+    echo "Please make sure that all required files are in the directory"
+    exit 1
+fi
+
 
 if [ $1 != "" ]
 then
-    echo "First argument passed"
+    ENDING=$(echo $1 | tail -c 6) 
+    if [ $ENDING == ".vmdk" ]
+    then
+        echo "Typ in the file name without the ending (without .vmdk)!"
+        exit 1
+    else 
+        echo "First argument passed"
+    fi
 else
     echo "First argument (the vmware image, without the ending (.vmdk)) is missing"
     exit 1
@@ -19,7 +40,13 @@ fi
 
 if [ $2 != "" ]
 then
-    echo "Second argument passed"
+    ENDING2=$(echo $2 | tail -c 5)
+    if [ $ENDING2 == ".vmx" ]
+    then
+        echo "Typ in the file name without the ending (without .vmx)!"
+    else
+        echo "Second argument passed"
+    fi
 else
     echo "Second argument (the vmware config file, without the ending (.vmx)) is missing"
     exit 1
@@ -41,21 +68,10 @@ echo $VMWARE_IMAGE
 VMWARE_FILE=$2".vmx"
 echo $VMWARE_FILE
 
-
 # Generated Outputfiles:
 LIBVIRT_IMAGE=$1".qcow2"
 LIBVIRT_FILE=$2".xml"
 LIBVIRT_BOX=$1"_box.box"
-
-## installing the script to convert .vmx to .xml file (vmware2libvirt)
-# sudo apt update
-# sudo  apt install python2
-# wget https://bazaar.launchpad.net/~ubuntu-virt/virt-goodies/trunk/download/head:/vmware2libvirt
-# chmod 755 vmware2libvirt
-# sudo mv -iv vmware2libvirt /usr/local/bin/
-############ CHANGE FIRST LINE TO ################
-############ #! /usr/bin/env python2.7 ###########
-
 
 # Converting the image .vmdk (vmware) to .qcow2 
 echo "converting the .vmdk file to qcow2"
@@ -84,6 +100,7 @@ cat << EOF > metadata.json
 EOF
 
 # Packing all Files together that are needed to add this box to Vagrant
+echo "..."
 echo "Packing the Box for Vagrant ..."
 tar cvzf $LIBVIRT_BOX ./metadata.json ./Vagrantfile ./$LIBVIRT_IMAGE
 echo "Box packed"

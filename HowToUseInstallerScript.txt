@@ -1,0 +1,13 @@
+Instuctions on vagrant-setup.sh
+
+1. Clone the file form github  
+    git clone https://github.com/fgtubs/CommunicationLab.git
+
+2. make the .sh file executable
+    chmod 744 vagrant-setup.sh
+
+3. execute the .sh script
+    ./vagrant-setup.sh
+
+
+If the message Daemons using outdated libaraies comes up during installation, update all of them

@@ -1,0 +1,22 @@
+Instuctions on vmware2libvirt_converter.sh 
+
+1. Clone the file form github  
+    git clone https://github.com/fgtubs/CommunicationLab.git
+
+2. Copy the script and the Vagrantfile to the folder where the vmware images are.
+    cp vmware2libvirt_converter.sh /Path/to/vmware/images
+    cp Vagrantfile /Path/to/vmware/images
+
+3. Make the .sh file executable
+    chmod 744 vagrant-setup.sh
+
+4. Make sure that the follwing files are in the directory.
+    - vmware2libvirt_converter.sh
+    - vmware image (ending in .vmdk)
+    - vmware file (ending in .vmx)
+    - Vagrant file 
+
+5. Call the script and pass the .vmdk and the .vmx files (but without the endings)
+    Example: if you want to convert the following vmware image (Fedora.vmdk, PC1.vmx)
+
+        ./vmware2libvirt_converter.sh Fedora PC1
