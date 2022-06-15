@@ -72,9 +72,9 @@ VMWARE_FILE=$2".vmx"
 echo $VMWARE_FILE
 
 # Generated Outputfiles:
-LIBVIRT_IMAGE=$1".qcow2"
-LIBVIRT_FILE=$1".xml"
-LIBVIRT_BOX=$1".box"
+LIBVIRT_IMAGE=$2".qcow2"
+LIBVIRT_FILE=$2".xml"
+LIBVIRT_BOX=$2".box"
 
 # Converting the image .vmdk (vmware) to .qcow2 
 echo "converting the .vmdk file to qcow2"
@@ -111,7 +111,7 @@ echo "Box packed"
 
 # The Box is added the Vagrant 
 echo "Adding the box to Vagrant ..."
-vagrant box add --name $1 --provider libvirt $LIBVIRT_BOX
+vagrant box add --name $2 --provider libvirt $LIBVIRT_BOX
 echo "Box added to Vagrant"
 
 echo " "
