@@ -73,7 +73,7 @@ echo $VMWARE_FILE
 
 # Generated Outputfiles:
 LIBVIRT_IMAGE=$1".qcow2"
-LIBVIRT_FILE=$2".xml"
+LIBVIRT_FILE=$1".xml"
 LIBVIRT_BOX=$1".box"
 
 # Converting the image .vmdk (vmware) to .qcow2 
