@@ -16,8 +16,10 @@ cat << EOF
 EOF
 
 read -p "Are all required file in this directory? [Y/n] " response
-if [ $response != 'Y' ] || [ $response != 'y' ]
+if [ $response == 'Y' ] || [ $response == 'y' ]
 then
+    echo "Ok"
+else
     echo "Please make sure that all required files are in the directory"
     exit 1
 fi
@@ -28,7 +30,7 @@ then
     ENDING=$(echo $1 | tail -c 6) 
     if [ $ENDING == ".vmdk" ]
     then
-        echo "Typ in the file name without the ending (without .vmdk)!"
+        echo "Type in file name of the first argument without the ending (without .vmdk)!"
         exit 1
     else 
         echo "First argument passed"
@@ -43,7 +45,8 @@ then
     ENDING2=$(echo $2 | tail -c 5)
     if [ $ENDING2 == ".vmx" ]
     then
-        echo "Typ in the file name without the ending (without .vmx)!"
+        echo "Type in the file name of the second argument without the ending (without .vmx)!"
+        exit 1
     else
         echo "Second argument passed"
     fi
@@ -71,7 +74,7 @@ echo $VMWARE_FILE
 # Generated Outputfiles:
 LIBVIRT_IMAGE=$1".qcow2"
 LIBVIRT_FILE=$2".xml"
-LIBVIRT_BOX=$1"_box.box"
+LIBVIRT_BOX=$1".box"
 
 # Converting the image .vmdk (vmware) to .qcow2 
 echo "converting the .vmdk file to qcow2"
@@ -108,7 +111,7 @@ echo "Box packed"
 
 # The Box is added the Vagrant 
 echo "Adding the box to Vagrant ..."
-vagrant box add --name $LIBVIRT_BOX --provider libvirt $LIBVIRT_BOX
+vagrant box add --name $1 --provider libvirt $LIBVIRT_BOX
 echo "Box added to Vagrant"
 
 echo " "
