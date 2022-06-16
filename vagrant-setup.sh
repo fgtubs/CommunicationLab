@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Update
+sudo apt update
+sudo apt upgrade
+
 # Install Vagrant 
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
@@ -21,11 +25,10 @@ sudo apt install -y nfs-kernel-server
 
 # installing the script to convert .vmx to .xml file (vmware2libvirt)
 sudo apt update
-sudo  apt install python2
+sudo  apt install -y python2
 wget https://bazaar.launchpad.net/~ubuntu-virt/virt-goodies/trunk/download/head:/vmware2libvirt
 chmod 755 vmware2libvirt
 sudo mv -iv vmware2libvirt /usr/local/bin/
 
 # changing the first line from '#! /usr/bin/env python' to this '#! /usr/bin/env python2.7'
-path=$(which vmware2libvirt)
-sed -i 's/python/python2.7/' $path 
+sudo sed -i 's/python/python2.7/' /usr/local/bin/vmware2libvirt
